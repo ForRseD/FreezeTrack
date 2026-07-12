@@ -9,7 +9,7 @@
   "lang": "ru",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "icon.png?v=2",
       "sizes": "512x512",
       "type": "image/png"
     }
