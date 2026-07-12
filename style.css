@@ -279,9 +279,9 @@ font-size:18px;
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
+
+gap:10px;
 
 background:#1e293b;
 
@@ -350,5 +350,25 @@ border-radius:10px;
 #backButton {
 
     left:20px;
+
+}
+
+.settingItem span{
+
+    flex:1;
+
+}
+
+
+.settingItem{
+
+    gap:10px;
+
+}
+
+
+.hiddenProduct{
+
+    opacity:0.35;
 
 }

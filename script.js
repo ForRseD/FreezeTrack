@@ -161,6 +161,10 @@ products.forEach((product,index)=>{
         return;
     }
 
+    if(product.hidden){
+        return;
+    }
+
 
         productList.innerHTML += `
 
@@ -396,7 +400,8 @@ categories.forEach(category=>{
 
 let categoryProducts = products.filter(product =>
 
-product.category === category
+product.category === category &&
+!product.hidden
 
 );
 

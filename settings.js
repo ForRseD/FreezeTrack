@@ -75,16 +75,21 @@ function render(){
 
                 <div class="settingItem">
 
-                    <span>
-                    ${product.name}
-                    </span>
+    <span class="${product.hidden ? 'hiddenProduct' : ''}">
+${product.name}
+</span>
 
 
-                    <button onclick="removeProduct(${index})">
-                    🗑️
-                    </button>
+    <button onclick="toggleHide(${index})">
+    ${product.hidden ? "👁️‍🗨️" : "👁️"}
+    </button>
 
-                </div>
+
+    <button onclick="removeProduct(${index})">
+    🗑️
+    </button>
+
+</div>
 
                 `;
 
@@ -175,6 +180,15 @@ function removeProduct(index){
 
 }
 
+function toggleHide(index){
+
+    products[index].hidden = !products[index].hidden;
+
+    save();
+
+    render();
+
+}
 
 
 render();
