@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>FreezeTrack</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="apple-touch-icon" href="icon.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>❄️ Заморозка</h1>
+
+
+<div id="reportDate"></div>
+
+
+<button id="shareButton">
+📤 Отправить остатки
+</button>
+
+
+
+<div class="tabs">
+
+<button class="tab active" onclick="changeCategory('Овощи', this)">
+🥦 Овощи
+</button>
+
+<button class="tab" onclick="changeCategory('Ягоды', this)">
+🍓 Ягоды
+</button>
+
+<button class="tab" onclick="changeCategory('Фритюр', this)">
+🍟 Фритюр
+</button>
+
+</div>
+
+
+
+<div id="productList"></div>
+
+<button id="settingsButton">
+⚙️
+</button>
+
+
+</div>
+
+
+
+<script src="script.js?v=2"></script>
+
+
+</body>
+
+</html>
