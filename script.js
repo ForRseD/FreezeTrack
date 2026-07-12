@@ -1,13 +1,17 @@
-let currentCategory = "Овощи";
+// =====================================
+// ЗАГРУЗКА ТОВАРОВ
+// =====================================
 
+let currentCategory = "Овощи";
 
 let products = [];
 
 
+// Загружаем сохранённые данные
+
 function loadProducts(){
 
-    const savedProducts =
-    localStorage.getItem("products");
+    const savedProducts = localStorage.getItem("products");
 
 
     if(savedProducts){
@@ -18,25 +22,32 @@ function loadProducts(){
 
     else {
 
+
+        // Начальные товары при первом запуске
+
         products = [
+
             {
-                name: "Цветная капуста",
-                category: "Овощи",
-                count: 4,
-                rest: 1
+                name:"Цветная капуста",
+                category:"Овощи",
+                count:4,
+                rest:1
             },
+
             {
-                name: "Фасоль",
-                category: "Овощи",
-                count: 7,
-                rest: 0
+                name:"Фасоль",
+                category:"Овощи",
+                count:7,
+                rest:0
             },
+
             {
-                name: "Брокколи",
-                category: "Овощи",
-                count: 2,
-                rest: 2
+                name:"Брокколи",
+                category:"Овощи",
+                count:2,
+                rest:2
             }
+
         ];
 
 
@@ -46,7 +57,10 @@ function loadProducts(){
 
 
 
-    products.forEach(product => {
+    // Добавляем категорию старым товарам
+
+    products.forEach(product=>{
+
 
         if(!product.category){
 
@@ -54,9 +68,12 @@ function loadProducts(){
 
         }
 
+
     });
 
+
 }
+
 
 
 loadProducts();
@@ -64,7 +81,11 @@ loadProducts();
 
 
 
-// Элементы
+
+// =====================================
+// ЭЛЕМЕНТЫ СТРАНИЦЫ
+// =====================================
+
 
 const productList =
 document.getElementById("productList");
@@ -76,7 +97,11 @@ document.getElementById("reportDate");
 
 
 
-// Сохранение
+
+// =====================================
+// СОХРАНЕНИЕ ДАННЫХ
+// =====================================
+
 
 function saveProducts(){
 
@@ -90,25 +115,36 @@ function saveProducts(){
 
 
 
-// Дата
+
+// =====================================
+// ДАТА ПОСЛЕДНЕГО ОБНОВЛЕНИЯ
+// =====================================
+
 
 function updateDate(){
+
 
     const now = new Date();
 
 
     reportDate.innerHTML =
+
     "Последнее обновление: " +
+
     now.toLocaleDateString("ru-RU") +
+
     " " +
-    now.toLocaleTimeString("ru-RU", {
+
+    now.toLocaleTimeString("ru-RU",{
 
         hour:"2-digit",
         minute:"2-digit"
 
     })
-+
-"<br><small style='opacity:0.4'>Версия: Кристина жопа</small>";
+
+    +
+
+    "<br><small style='opacity:0.4'>Версия: Кристина жопа</small>";
 
 }
 
@@ -116,7 +152,10 @@ function updateDate(){
 
 
 
-// Смена вкладки
+// =====================================
+// ПЕРЕКЛЮЧЕНИЕ КАТЕГОРИЙ
+// =====================================
+
 
 function changeCategory(category, button){
 
@@ -124,21 +163,22 @@ function changeCategory(category, button){
     currentCategory = category;
 
 
-
-    document.querySelectorAll(".tab")
+    document
+    .querySelectorAll(".tab")
     .forEach(tab=>{
+
 
         tab.classList.remove("active");
 
-    });
 
+    });
 
 
     button.classList.add("active");
 
 
-
     render();
+
 
 }
 
@@ -146,7 +186,10 @@ function changeCategory(category, button){
 
 
 
-// Отрисовка товаров
+// =====================================
+// ОТРИСОВКА ТОВАРОВ
+// =====================================
+
 
 function render(){
 
@@ -155,15 +198,27 @@ function render(){
 
 
 
-products.forEach((product,index)=>{
+    products.forEach((product,index)=>{
 
-    if(product.category !== currentCategory){
-        return;
-    }
 
-    if(product.hidden){
-        return;
-    }
+        // другая категория
+
+        if(product.category !== currentCategory){
+
+            return;
+
+        }
+
+
+
+        // скрытые товары не показываем
+
+        if(product.hidden){
+
+            return;
+
+        }
+
 
 
         productList.innerHTML += `
@@ -173,7 +228,9 @@ products.forEach((product,index)=>{
 
 
 <div class="name">
+
 ${product.name}
+
 </div>
 
 
@@ -181,29 +238,40 @@ ${product.name}
 <div class="columns">
 
 
-
 <div class="column">
 
+
 <div class="label">
+
 Коробки
+
 </div>
+
 
 
 <div class="controls">
 
 
 <button onclick="minusBox(${index})">
+
 -
+
 </button>
+
 
 
 <div class="count">
+
 ${product.count}
+
 </div>
 
 
+
 <button onclick="plusBox(${index})">
+
 +
+
 </button>
 
 
@@ -211,6 +279,7 @@ ${product.count}
 
 
 </div>
+
 
 
 
@@ -219,7 +288,9 @@ ${product.count}
 
 
 <div class="label">
+
 Остаток
+
 </div>
 
 
@@ -228,38 +299,41 @@ ${product.count}
 
 
 <button onclick="minusRest(${index})">
+
 -
+
 </button>
+
 
 
 <div class="count">
+
 ${product.rest}
+
 </div>
+
 
 
 <button onclick="plusRest(${index})">
+
 +
+
 </button>
 
 
-
 </div>
 
 
 </div>
 
 
-
 </div>
 
 
-
 </div>
-
 
 
 `;
-
 
 
     });
@@ -271,11 +345,10 @@ ${product.rest}
 
 }
 
+// =====================================
+// ИЗМЕНЕНИЕ КОЛИЧЕСТВА КОРОБОК
+// =====================================
 
-
-
-
-// Коробки
 
 function plusBox(index){
 
@@ -308,7 +381,10 @@ function minusBox(index){
 
 
 
-// Остаток
+// =====================================
+// ИЗМЕНЕНИЕ ОСТАТКА
+// =====================================
+
 
 function plusRest(index){
 
@@ -341,7 +417,10 @@ function minusRest(index){
 
 
 
-// Отправка отчёта
+// =====================================
+// ОТПРАВКА ОТЧЁТА
+// =====================================
+
 
 document
 .getElementById("shareButton")
@@ -349,9 +428,7 @@ document
 
 
 
-let text =
-
-"❄️ Заморозка\n";
+let text = "❄️ Заморозка\n";
 
 
 
@@ -385,9 +462,7 @@ minute:"2-digit"
 const categories = [
 
 "Овощи",
-
 "Ягоды",
-
 "Фритюр"
 
 ];
@@ -395,22 +470,30 @@ const categories = [
 
 
 
+
 categories.forEach(category=>{
 
 
-let categoryProducts = products.filter(product =>
+let categoryProducts = products.filter(product=>
+
 
 product.category === category &&
+
 !product.hidden
 
+
 );
+
+
 
 
 
 if(categoryProducts.length > 0){
 
 
+
 let emoji = "";
+
 
 
 if(category==="Овощи") emoji="🥦";
@@ -418,6 +501,8 @@ if(category==="Овощи") emoji="🥦";
 if(category==="Ягоды") emoji="🍓";
 
 if(category==="Фритюр") emoji="🍟";
+
+
 
 
 
@@ -436,24 +521,21 @@ category.toUpperCase()
 
 
 
+
+
 categoryProducts.forEach(product=>{
+
 
 
 text +=
 
 product.name +
 
-"\n";
-
-
-
-text +=
-
-"📦 " +
+" — 📦 " +
 
 product.count +
 
-" коробки | ◽ остаток " +
+" кор. | ◽ " +
 
 product.rest +
 
@@ -470,6 +552,8 @@ product.rest +
 
 
 });
+
+
 
 
 
@@ -503,35 +587,128 @@ alert(text);
 
 
 
-render();
+
+
+
+
+// =====================================
+// ОЧИСТКА ЗНАЧЕНИЙ
+// =====================================
+
+
+document
+.getElementById("clearButton")
+.onclick=function(){
+
+
+
+if(confirm("Очистить все значения?")){
+
+
+
+products.forEach(product=>{
+
+
+product.count = 0;
+
+product.rest = 0;
+
+
+});
+
+
+
+
+saveProducts();
 
 updateDate();
+
+
+
+// полностью перерисовываем список
+
+render();
+
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+// =====================================
+// КНОПКА НАСТРОЕК
+// =====================================
+
 
 document
 .getElementById("settingsButton")
 .onclick=function(){
 
+
 window.location.href="settings.html";
+
 
 };
 
 
-window.addEventListener("visibilitychange", function(){
-
-    if(document.visibilityState === "visible"){
-
-        const savedProducts =
-        localStorage.getItem("products");
 
 
-        if(savedProducts){
 
-            products = JSON.parse(savedProducts);
 
-            render();
 
-        }
+// =====================================
+// ОБНОВЛЕНИЕ ПОСЛЕ ВОЗВРАТА ИЗ НАСТРОЕК
+// =====================================
 
-    }
+
+window.addEventListener("visibilitychange",function(){
+
+
+
+if(document.visibilityState === "visible"){
+
+
+
+const savedProducts =
+localStorage.getItem("products");
+
+
+
+if(savedProducts){
+
+
+products = JSON.parse(savedProducts);
+
+
+render();
+
+
+}
+
+
+}
+
+
 
 });
+
+
+
+
+
+
+// =====================================
+// ЗАПУСК ПРИ ОТКРЫТИИ
+// =====================================
+
+
+render();
+
+updateDate();

@@ -79,6 +79,9 @@ function render(){
 ${product.name}
 </span>
 
+<button onclick="editProduct(${index})">
+✏️
+</button>
 
     <button onclick="toggleHide(${index})">
     ${product.hidden ? "👁️‍🗨️" : "👁️"}
@@ -190,6 +193,25 @@ function toggleHide(index){
 
 }
 
+function editProduct(index){
+
+    let newName = prompt(
+        "Новое название товара",
+        products[index].name
+    );
+
+
+    if(!newName) return;
+
+
+    products[index].name = newName;
+
+
+    save();
+
+    render();
+
+}
 
 render();
 window.addEventListener("pageshow", function(){
